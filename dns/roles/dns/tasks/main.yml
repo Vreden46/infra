@@ -1,0 +1,33 @@
+#    - assert:
+#        that:
+#          - IP is match('^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$')
+#        fail_msg: Die Variable IP ist keine gültige IP-Adresse!
+  
+   
+    - debug:    
+        msg: "Neu 1. Meine Eingabe HN: {{HN}}"
+    - debug:
+        msg: "Neu 2. Meine Eingabe IP: {{IP}}"
+    
+    
+    - name: install updates (Ubuntu, Debian)
+      tags: update
+      apt:
+       upgrade: yes
+       update_cache: yes
+      when: ansible_distribution in ['Ubuntu', 'Debian', 'Linux Mint'] and inventory_hostname != 'mywebserver.vreden.home'
+          
+    - name: install updates dist-upgrade
+      tags: dist
+      apt:
+       upgrade: dist
+       update_cache: yes
+       autoremove: yes  # Remove obsolete packages
+      when: ansible_distribution in ['Debian'] and inventory_hostname != 'mywebserver.vreden.home'
+      
+    - name: Upgrade all packages
+      apt:
+       upgrade: yes
+       update_cache: yes
+       autoremove: yes  # Remove obsolete packages
+      when: ansible_distribution in ['Ubuntu'] and inventory_hostname != 'networker.vreden.home'

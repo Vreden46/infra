@@ -1,0 +1,20 @@
+---
+- name: New Debian
+  hosts: newbie_deb, dns
+ # gather_facts: false
+  
+  vars_files:
+    - roles/dns/host_vars/setup.yml
+  
+  vars_prompt:
+    - name: IP
+      prompt: Bitte IP-Adresse eingeben
+      private: false
+    
+    - name: HN
+      prompt: und hostname eingeben
+      private: false
+      
+  roles:
+     - dns
+     

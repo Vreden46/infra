@@ -1,0 +1,3 @@
+---
+ansible_become_password: "Molixnel46!"
+ansible_su_pass: "Molixnel46!"

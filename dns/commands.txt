@@ -1,0 +1,1 @@
+ansible-playbook -bK --become-method su role_new.yml

@@ -2,10 +2,10 @@
 
 meine_variable: "frage"
 reversed_ip: 0
-web_server_port: 8080
-web_server_root: "/var/www/html"
+#web_server_port: 8080
+#web_server_root: "/var/www/html"
 netmask: 255.255.255.0
-gateway: 192.168.1.1
+gateway: 192.168.0.1
 nameserver_ip: 192.168.0.35
 dns_servers: 
   - 192.168.0.35

@@ -1,0 +1,15 @@
+---
+- name: Update Ubuntu Server
+  hosts: dns
+  become: true  # Run tasks with escalated privileges (sudo)
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Upgrade all packages
+      apt:
+        upgrade: yes
+        autoremove: yes  # Remove obsolete packages
+      when: ansible_distribution in ['Ubuntu', 'Debian', 'Linux Mint'] and inventory_hostname != 'networker.vreden.home'
