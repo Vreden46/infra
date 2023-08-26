@@ -33,7 +33,7 @@
       when: ansible_distribution in ['Ubuntu'] and inventory_hostname != 'networker.vreden.home'
       
      
-    - name: Setze statische IP-Adresse
+    - name: Setze statische IP-Adresse für Debiansysteme
       lineinfile:
         dest: /etc/network/interfaces
         regexp: '^(\s*address\s)'
@@ -41,6 +41,14 @@
       become: true
       when: ansible_distribution in ['Debian'] and inventory_hostname != 'networker.vreden.home'
       
+    - name: Setze statische IP-Adresse für Ubuntusysteme
+      ansible.builtin.lineinfile:
+        path: /etc/netplan/00-installer-config.yaml
+        regexp: '^(\s*-\s*)\S+/\d+$'
+        line: '      - {{ IP }}/24'
+      become: true
+      when: ansible_distribution in ['Ubuntu'] and inventory_hostname != 'networker.vreden.home'
+
     - name: Setze Subnetzmaske
       lineinfile:
         dest: /etc/network/interfaces

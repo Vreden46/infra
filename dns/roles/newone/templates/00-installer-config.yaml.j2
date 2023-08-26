@@ -1,0 +1,14 @@
+# This is the network config written by 'subiquity'
+network:
+  ethernets:
+    enp6s18:
+      addresses:
+      - {{IP}}/24
+      nameservers:
+        addresses:
+        - {{nameserver_ip}}
+        search: []
+      routes:
+      - to: default
+        via: 192.168.0.1
+  version: 2
