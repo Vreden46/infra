@@ -31,3 +31,50 @@
        update_cache: yes
        autoremove: yes  # Remove obsolete packages
       when: ansible_distribution in ['Ubuntu'] and inventory_hostname != 'networker.vreden.home'
+      
+     
+    - name: Setze statische IP-Adresse
+      lineinfile:
+        dest: /etc/network/interfaces
+        regexp: '^(\s*address\s)'
+        line: 'address {{ IP }}'
+      become: true
+      when: ansible_distribution in ['Debian'] and inventory_hostname != 'networker.vreden.home'
+      
+    - name: Setze Subnetzmaske
+      lineinfile:
+        dest: /etc/network/interfaces
+        regexp: '^(\s*netmask\s)'
+        line: 'netmask {{ netmask }}'
+      become: true
+      when: ansible_distribution in ['Debian'] and inventory_hostname != 'networker.vreden.home'
+      
+    - name: Setze Gateway
+      lineinfile:
+        dest: /etc/network/interfaces
+        regexp: '^(\s*gateway\s)'
+        line: 'gateway {{ gateway }}'
+      become: true
+      when: ansible_distribution in ['Debian'] and inventory_hostname != 'networker.vreden.home'
+      
+    - name: Setze DNS-Server in /etc/network/interfaces
+      lineinfile:
+        dest: /etc/network/interfaces
+        regexp: '^(\s*dns-nameservers\s)'
+        line: 'dns-nameservers {{ dns_servers | join(" ") }}'
+      become: true
+      when: ansible_distribution in ['Debian'] and inventory_hostname != 'networker.vreden.home'
+    
+    - name: Set a hostname
+      ansible.builtin.hostname:
+        name: '{{ HN }}'
+      become: true
+      when: inventory_hostname != 'networker.vreden.home'
+      
+    - name: Resolv.conf-Vorlagendatei kopieren
+      template:
+        src: roles/newone/templates/resolv.conf.j2
+        dest: /etc/resolv.conf
+      notify:
+        - Reboot
+      when: inventory_hostname != 'networker.vreden.home'
