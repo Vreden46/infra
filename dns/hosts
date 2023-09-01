@@ -1,8 +1,8 @@
 [dns]
-networker.vreden.home ansible_host=networker.vreden.home ansible_become_method=sudo ansible_become_password="Molixnel46!"
+192.168.0.35 ansible_host=192.168.0.35 ansible_become_method=sudo ansible_become_password="Molixnel46!"
 
 
 [newbie_deb]
 #192.168.0.181 ansible_host=192.168.0.181 ansible_become_method=su ansible_become_password="Molixnel46!"
-192.168.0.81 ansible_host=192.168.0.81 ansible_become_method=sudo ansible_become_password="Molixnel46!"
+192.168.0.89 ansible_host=192.168.0.89 ansible_become_method=sudo ansible_become_password="Molixnel46!"
 

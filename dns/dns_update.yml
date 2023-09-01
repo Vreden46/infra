@@ -1,0 +1,21 @@
+- name: Add or modify ansible.example.org A to 192.168.1.1"
+  hosts: dns 
+  
+  tasks:
+  - name: Update DNS A Record
+    nsupdate:
+      server: "192.168.0.35"
+      zone: "vreden.home"
+      record: "raspberrypi"
+      value: "192.168.0.184"
+      
+  - name: Update PTR Record
+    nsupdate:
+      server: "192.168.0.35"
+      zone: "0.168.192.in-addr.arpa"  # Die korrekte rDNS-Zone für das Subnetz
+      record: "184"  # Die letzten Oktette der IP-Adresse ohne Punkte
+      type: PTR
+      value: "raspberrypi.vreden.home."
+     
+  - name: Reload DNS configuration using rndc
+    command: rndc reload

@@ -83,6 +83,10 @@
       template:
         src: roles/newone/templates/resolv.conf.j2
         dest: /etc/resolv.conf
-      notify:
-        - Reboot
+      #notify:
+        #- Reboot
+      when: inventory_hostname != 'networker.vreden.home'
+      
+    - name: Reboot the server
+      reboot:
       when: inventory_hostname != 'networker.vreden.home'
