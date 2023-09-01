@@ -1,7 +1,11 @@
 ---
 - name: Aktualisiere Ubuntu-Systeme
   hosts: all
+<<<<<<< HEAD:mybooks/update.yml
 
+=======
+  become: true
+>>>>>>> b04855e8995723ebb8784fedeee3123ce6fbc773:playbooks/ubuntu-update.yml
   tasks:
     - name: Aktualisiere die Paketliste
       apt:
