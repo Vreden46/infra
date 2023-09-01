@@ -1,6 +1,6 @@
 ---
 - name: Aktualisiere Ubuntu-Systeme
-  hosts: ubuntu_hosts
+  hosts: all
   become: yes
   tasks:
     - name: Aktualisiere die Paketliste
